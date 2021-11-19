@@ -23,27 +23,41 @@ namespace Accounting
 
         private void Main_Load(object sender, EventArgs e)
         {
-            ConfigDataTable();
-            dataGridView1.CellEndEdit += new DataGridViewCellEventHandler(this.OnCellValueChanged);
-            dataGridView2.CellEndEdit += new DataGridViewCellEventHandler(this.OnCellValueChanged);
-            dataGridView1.ContextMenuStrip = contextMenuStrip1;
-            dataGridView2.ContextMenuStrip = contextMenuStrip1;
+            try
+            {
+                ConfigDataTable();
+                dataGridView1.CellEndEdit += new DataGridViewCellEventHandler(this.OnCellValueChanged);
+                dataGridView2.CellEndEdit += new DataGridViewCellEventHandler(this.OnCellValueChanged);
+                dataGridView1.ContextMenuStrip = contextMenuStrip1;
+                dataGridView2.ContextMenuStrip = contextMenuStrip1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void добавитьЗаписьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            switch (Учет.SelectedIndex)
+            try
             {
-                case 0:
-                    new AddNoteForm(typeof(AccountingForOriginals_Model)).ShowDialog();
-                    break;
-                case 1:
-                    new AddNoteForm(typeof(AccountingForNotifications_Model)).ShowDialog();
-                    break;
-                default:
-                    break;
+                switch (Учет.SelectedIndex)
+                {
+                    case 0:
+                        new AddNoteForm(typeof(AccountingForOriginals_Model)).ShowDialog();
+                        break;
+                    case 1:
+                        new AddNoteForm(typeof(AccountingForNotifications_Model)).ShowDialog();
+                        break;
+                    default:
+                        break;
+                }
+                ConfigDataTable();
             }
-            ConfigDataTable();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private async void ConfigDataTable()
@@ -65,9 +79,9 @@ namespace Accounting
                     NotesCount.Text = $"Подлинники: {table1.Rows.Count} | Извещения: {table2.Rows.Count}";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -174,25 +188,32 @@ namespace Accounting
 
         private void Delete()
         {
-            using (DataBase_Context db = new DataBase_Context())
+            try
             {
-                if (Учет.SelectedIndex == 0)
+                using (DataBase_Context db = new DataBase_Context())
                 {
-                    var t = from r in db.Originals_Models.ToList()
-                            where r.Id == Convert.ToInt32(dataGridView1.SelectedCells[0].Value)
-                            select r;
-                    db.RemoveRange(t);
+                    if (Учет.SelectedIndex == 0)
+                    {
+                        var t = from r in db.Originals_Models.ToList()
+                                where r.Id == Convert.ToInt32(dataGridView1.SelectedCells[0].Value)
+                                select r;
+                        db.RemoveRange(t);
+                    }
+                    else
+                    {
+                        var t = from r in db.Notifications_Models.ToList()
+                                where r.Id == Convert.ToInt32(dataGridView2.SelectedCells[0].Value)
+                                select r;
+                        db.RemoveRange(t);
+                    }
+                    db.SaveChanges();
                 }
-                else
-                {
-                    var t = from r in db.Notifications_Models.ToList()
-                            where r.Id == Convert.ToInt32(dataGridView2.SelectedCells[0].Value)
-                            select r;
-                    db.RemoveRange(t);
-                }
-                db.SaveChanges();
+                ConfigDataTable();
             }
-            ConfigDataTable();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -202,25 +223,32 @@ namespace Accounting
 
         private void редактироватьToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            using (DataBase_Context db = new DataBase_Context())
+            try
             {
-                if (Учет.SelectedIndex == 0)
+                using (DataBase_Context db = new DataBase_Context())
                 {
-                    var t = from r in db.Originals_Models.ToList()
-                            where r.Id == Convert.ToInt32(dataGridView1.SelectedCells[0].Value)
-                            select r;
-                    new EditNoteForm(t.First()).ShowDialog();
+                    if (Учет.SelectedIndex == 0)
+                    {
+                        var t = from r in db.Originals_Models.ToList()
+                                where r.Id == Convert.ToInt32(dataGridView1.SelectedCells[0].Value)
+                                select r;
+                        new EditNoteForm(t.First()).ShowDialog();
+                    }
+                    else
+                    {
+                        var t = from r in db.Notifications_Models.ToList()
+                                where r.Id == Convert.ToInt32(dataGridView2.SelectedCells[0].Value)
+                                select r;
+                        new EditNoteForm(t.First()).ShowDialog();
+                    }
+                    db.SaveChanges();
                 }
-                else
-                {
-                    var t = from r in db.Notifications_Models.ToList()
-                            where r.Id == Convert.ToInt32(dataGridView2.SelectedCells[0].Value)
-                            select r;
-                    new EditNoteForm(t.First()).ShowDialog();
-                }
-                db.SaveChanges();
+                ConfigDataTable();
             }
-            ConfigDataTable();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
