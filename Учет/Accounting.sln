@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounting", "Accounting.csproj", "{F9E24DC2-B9C5-4457-93DD-BEF43806E3A4}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AccountingSetup", "..\AccountingSetup\AccountingSetup.vdproj", "{1F37D3C9-D90A-40CD-A05A-0B85E2637076}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9E24DC2-B9C5-4457-93DD-BEF43806E3A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9E24DC2-B9C5-4457-93DD-BEF43806E3A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9E24DC2-B9C5-4457-93DD-BEF43806E3A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9E24DC2-B9C5-4457-93DD-BEF43806E3A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F37D3C9-D90A-40CD-A05A-0B85E2637076}.Debug|Any CPU.ActiveCfg = Debug
+		{1F37D3C9-D90A-40CD-A05A-0B85E2637076}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {712DF9E7-87D0-445C-9F4E-B71079C5779A}
+	EndGlobalSection
+EndGlobal
