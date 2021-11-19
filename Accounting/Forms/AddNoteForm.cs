@@ -74,6 +74,7 @@ namespace Accounting
             this.Height = pointlable.Y + 100;
             AddedControlsAligment.AlignHorisontalByMaximum(AddedControls);
             this.Width = AddedControlsAligment.WhichControlAddedLargesize(AddedControls) + 30;
+            button1.Location = new Point(this.Width / 2 - button1.Width / 2, this.Height - 40 - button1.Height);
         }
 
         private void button1_Click(object sender, EventArgs e)
