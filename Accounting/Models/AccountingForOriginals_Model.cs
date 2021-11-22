@@ -9,14 +9,14 @@ namespace Accounting.Models
     internal class AccountingForOriginals_Model : IAccountingModel
     {
         public long Id { get; set; }
-        public long Инвентаризационный_номер_документа {get;set;}
-        public DateTime Дата_регистрации { get; set; }
-        public string Обозначение_документа { get; set; }
-        public int Количество_листов { get; set; }
-        public Format Формат_документа { get; set; }
-        public string Наименование_документа { get; set; }
-        public string Кем_выпущен_документ { get; set; }
-        public string Примечание { get; set; }
+        public long Inventory_Document_Number { get;set;}
+        public DateTime Registration_Date { get; set; }
+        public string Document_Name { get; set; }
+        public int Number_of_sheets { get; set; }
+        public Format Document_format { get; set; }
+        public string Title_of_the_document { get; set; }
+        public string Released_by { get; set; }
+        public string Note { get; set; }
         long IAccountingModel.ID { get => Id; set => Id = value; }
     }
 

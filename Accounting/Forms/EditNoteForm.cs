@@ -47,7 +47,8 @@ namespace Accounting.Forms
             Point pointlable = new Point(10, 30);
             foreach (var item in properties)
             {
-                Label label = new Label() { Text = item.Name.Replace("_", " ") + $" ({LangHelper.LangTypeDictionary[item.PropertyType.Name]})", Location = new Point(pointlable.X, pointlable.Y), AutoSize = true };
+                Label label = new Label() { Text = item.DeclaringType.Name == "AccountingForNotifications_Model" ? LangHelper.AccountingForNotification_ModelDictionary[item.Name] : LangHelper.AccountingForOriginals_ModelDictionary[item.Name] + $" ({LangHelper.LangTypeDictionary[item.PropertyType.Name]})",
+                    Location = new Point(pointlable.X, pointlable.Y), AutoSize = true };
                 this.Controls.Add(label);
                 Point point = new Point(pointlable.X + label.Width, pointlable.Y);
                 switch (item.PropertyType.Name.ToString())

@@ -9,18 +9,18 @@ namespace Accounting.Models
     internal class AccountingForNotifications_Model : IAccountingModel
     {
         public long Id { get; set; }
-        public DateTime Дата { get; set; }
-        public string Обозначение_Извещения { get; set; }
-        public string Обозначение_Изменяемого_документа {get;set;}
-        public string Индекс_изделия { get; set; }
-        public long Литера_изменения { get; set; }
-        public long Шифр_изменения { get; set; }
-        public int Количество_листов { get; set; }
-        public string Отдел_сектор { get; set; }
-        public string Кем_выпущен { get; set; }
-        public DateTime Срок_изменения { get; set; }
-        public DateTime Сдано { get; set; }
-        public DateTime Дата_исполнения { get; set; }
+        public DateTime Date { get; set; }
+        public string Designation_Notice { get; set; }
+        public string Document_Change_Designation { get;set;}
+        public string Product_index { get; set; }
+        public long Change_litera { get; set; }
+        public long Change_code { get; set; }
+        public int Number_of_sheets { get; set; }
+        public string Department_sector { get; set; }
+        public string Released_by { get; set; }
+        public DateTime Change_time { get; set; }
+        public DateTime Rented { get; set; }
+        public DateTime Execution_Date { get; set; }
         long IAccountingModel.ID { get => Id; set => Id = value; }
     }
 }

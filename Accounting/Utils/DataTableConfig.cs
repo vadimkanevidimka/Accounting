@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
 using Accounting.Models;
+using Accounting.Utils;
 
 namespace Accounting
 {
@@ -15,7 +16,18 @@ namespace Accounting
             IEnumerable<PropertyInfo> properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
             foreach (var item in properties)
             {
-                table.Columns.Add(item.Name.Replace("_"," "));
+                switch (type.Name)
+                {
+                    case "AccountingForNotifications_Model":
+                        table.Columns.Add(LangHelper.AccountingForNotification_ModelDictionary[item.Name]);
+                        break;
+                    case "AccountingForOriginals_Model":
+                        table.Columns.Add(LangHelper.AccountingForOriginals_ModelDictionary[item.Name]);
+                        break;
+                    default:
+                        break;
+                }
+                
             }
         }
 
@@ -48,16 +60,16 @@ namespace Accounting
             {
                 case nameof(AccountingForOriginals_Model):
                     Data = (IEnumerable<T>)(from range in Models as List<AccountingForOriginals_Model>
-                                where range.Обозначение_документа.ToLower().Contains(FilterText.ToLower())
-                                || range.Наименование_документа.ToLower().Contains(FilterText.ToLower())
-                                || range.Инвентаризационный_номер_документа.ToString().ToLower().Contains(FilterText.ToLower())
+                                where range.Document_Name.ToLower().Contains(FilterText.ToLower())
+                                || range.Title_of_the_document.ToLower().Contains(FilterText.ToLower())
+                                || range.Inventory_Document_Number.ToString().ToLower().Contains(FilterText.ToLower())
                                 select range);
                     break;
                 case nameof(AccountingForNotifications_Model):
                     Data = (IEnumerable<T>)(from range in Models as List<AccountingForNotifications_Model>
-                                where range.Индекс_изделия.Contains(FilterText.ToLower())
-                                || range.Обозначение_Извещения.ToLower().Contains(FilterText.ToLower())
-                                || range.Обозначение_Изменяемого_документа.ToLower().Contains(FilterText.ToLower())
+                                where range.Product_index.Contains(FilterText.ToLower())
+                                || range.Designation_Notice.ToLower().Contains(FilterText.ToLower())
+                                || range.Document_Change_Designation.ToLower().Contains(FilterText.ToLower())
                                 select range);
                     break;
                 default:
